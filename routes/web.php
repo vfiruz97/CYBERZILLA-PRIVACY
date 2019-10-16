@@ -14,16 +14,3 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('update', 'ScheduleController@upload');
-
-Route::get('get', 'ScheduleController@index');
-
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

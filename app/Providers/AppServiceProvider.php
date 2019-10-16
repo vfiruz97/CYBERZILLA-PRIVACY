@@ -3,9 +3,6 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
-use App\ScheduleCinema;
-use \App\Observers\ScheduleCinemaObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -26,9 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Schema::defaultStringLength(191);
-
-        ScheduleCinema::observe(ScheduleCinemaObserver::class);
-
+        //
     }
 }
