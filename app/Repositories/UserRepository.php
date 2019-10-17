@@ -27,4 +27,12 @@ class UserRepository extends CoreRepository
 
         return $result;
     }
+
+    public function getUserById($id) {
+        $result = $this->startConditions()
+            ->with(['city:id,name', 'role:user_id,role_id'])
+            ->find($id);
+
+        return $result;
+    }
 }
