@@ -15,16 +15,18 @@ class UserRolesTableSeeder extends Seeder
             [
                 'user_id' => 1,
                 'role_id' => 1,
+                'slug' => 'админ'
             ],
         ];
 
         DB::table('user_roles')->insert($data);
 
-        for ($i=2; $i<1002; $i++) {
+        for ($i=2; $i<102; $i++) {
             $data = [
                 [
                     'user_id' => $i,
                     'role_id' => 2,
+                    'slug' => 'пользователь'
                 ],
             ];
 

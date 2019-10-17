@@ -13,7 +13,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="surname">Фамилия</label>
-                                <input name='surname' value=""
+                                <input name='surname' value="{{ old('surname', $item->surname) }}"
                                        id='surname'
                                        type="text"
                                        class="form-control"
@@ -24,7 +24,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="name">Имя</label>
-                                <input name='name' value=""
+                                <input name='name' value="{{ old('name', $item->name) }}"
                                        id='name'
                                        type="text"
                                        class="form-control"
@@ -38,7 +38,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="age">Возраст</label>
-                                <input name='age' value=""
+                                <input name='age' value="{{ old('age', $item->age) }}"
                                        id='age'
                                        type="number"
                                        class="form-control"
@@ -51,7 +51,6 @@
                                 <select name='city_id'
                                         id='city_id'
                                         class="form-control"
-                                        placeholder='Выберите любимый город'
                                         required>
                                     @foreach($cities as $city)
                                         <option value="{{ $city->id }}">
@@ -68,14 +67,14 @@
                         <textarea name='about'
                                   id='about'
                                   class="form-control"
-                                  rows="3"></textarea>
+                                  rows="3">{{ old('about', $item->about) }}</textarea>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="email">E-mail</label>
-                                <input name='email' value=""
+                                <input name='email' value="{{ old('email', $item->email) }}"
                                        id='email'
                                        type="email"
                                        class="form-control"

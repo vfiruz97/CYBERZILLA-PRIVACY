@@ -21,7 +21,7 @@ class UserRepository extends CoreRepository
 
         $result = $this->startConditions()
             ->select($columns)
-            ->with(['city:id,name', 'role:user_id,role_id'])
+            ->with(['city:id,name', 'role:user_id,role_id,slug'])
             ->orderBy('id', 'ASC')
             ->paginate(10);
 
@@ -30,7 +30,7 @@ class UserRepository extends CoreRepository
 
     public function getUserById($id) {
         $result = $this->startConditions()
-            ->with(['city:id,name', 'role:user_id,role_id'])
+            ->with(['city:id,name', 'role:user_id,role_id,slug'])
             ->find($id);
 
         return $result;

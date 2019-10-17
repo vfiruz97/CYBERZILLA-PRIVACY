@@ -14,11 +14,13 @@ class RolesTableSeeder extends Seeder
         $data = [
             [
                 'name' => 'admin',
-                'description' => 'Имеет все права администратора'
+                'description' => 'Имеет все права администратора',
+                'slug' => 'админ'
             ],
             [
                 'name' => 'user',
-                'description' => 'Имеет ограниченные права'
+                'description' => 'Имеет ограниченные права',
+                'slug' => 'пользователь'
             ],
         ];
 

@@ -27,7 +27,7 @@ $groupFrontend = [
     'namespace' => 'Frontend',
 ];
 Route::group($groupFrontend, function(){
-    $methods = ['index', 'edit', 'update', 'destroy'];
+    $methods = ['index', 'show', 'edit', 'update', 'destroy'];
     Route::resource('user', 'UserController')
         ->only($methods)
         ->names('user');

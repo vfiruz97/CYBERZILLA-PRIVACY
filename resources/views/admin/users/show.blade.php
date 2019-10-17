@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="container">
+        @include('admin.users.includes.create.error_messages')
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -84,7 +85,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="role">Роль</label>
-                                            <input name='role' value="{{ $item->roleTitle }}"
+                                            <input name='role' value="{{ $item->role->slug }}"
                                                    id='role'
                                                    type="text"
                                                    class="form-control"
@@ -102,7 +103,7 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{route('admin.user.index')}}" class="btn btn-warning btn-block">Назад</a>
+                        <a href="{{route('admin.user.index')}}" class="btn btn-info btn-block">Назад</a>
                         <hr>
                         <div class="form-group">
                             <label for="id">ID:</label>

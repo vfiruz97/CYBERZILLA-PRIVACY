@@ -15,13 +15,8 @@ class User extends Authenticatable
      *
      * @var array
      */
-    private $rolesTitle = [
-        '1' => 'админ',
-        '2' => 'пользователь',
-    ];
-
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'surname', 'about', 'age', 'city_id'
     ];
 
     /**
@@ -52,9 +47,5 @@ class User extends Authenticatable
 
     public function getFullNameAttribute() {
         return $this->surname.' '.$this->name;
-    }
-
-    public function getRoleTitleAttribute() {
-        return $this->rolesTitle[$this->role->role_id];
     }
 }

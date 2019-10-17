@@ -7,7 +7,8 @@
              <input name='id' value="{{ $item->id }}"
                     id='id'
                     type="text"
-                    class="form-control">
+                    class="form-control"
+                    disabled>
          </div>
          <hr>
          <div class="form-group">
@@ -15,7 +16,8 @@
              <input name='created_at' value="{{ $item->created_at }}"
                     id='created_at'
                     type="text"
-                    class="form-control">
+                    class="form-control"
+                    disabled>
          </div>
 
          <div class="form-group">
@@ -23,7 +25,8 @@
              <input name='updated_at' value="{{ $item->updated_at }}"
                     id='updated_at'
                     type="text"
-                    class="form-control">
+                    class="form-control"
+                    disabled>
          </div>
          <hr>
          <div class="form-group">
@@ -31,7 +34,8 @@
              <input name='deleted_at' value="{{ $item->deleted_at }}"
                     id='deleted_at'
                     type="text"
-                    class="form-control">
+                    class="form-control"
+                    disabled>
          </div>
      </div>
 </div>

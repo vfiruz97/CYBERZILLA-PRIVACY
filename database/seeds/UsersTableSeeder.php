@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
 
         DB::table('users')->insert($data);
 
-        for ($i=0; $i<1000; $i++) {
+        for ($i=0; $i<100; $i++) {
             $data = [
                 [
                     'name' => $faker->firstName,

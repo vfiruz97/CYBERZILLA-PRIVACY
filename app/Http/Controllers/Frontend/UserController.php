@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Frontend\BaseController as BaseController;
+use App\Model\User;
+use App\Repositories\{UserRepository, CityRepository};
+use App\Http\Requests\UserUpdateRequest;
 
 class UserController extends BaseController
 {
@@ -12,36 +14,20 @@ class UserController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
+    private $userRepository;
+    private $cityRepository;
+
     public function __construct()
     {
         parent::__construct();
-        //
+
+        $this->userRepository = app(UserRepository::class);
+        $this->cityRepository = app(CityRepository::class);
     }
 
     public function index()
     {
-        dd(__METHOD__);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        dd(__METHOD__);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        dd(__METHOD__);
+        return view('frontend.users.index');
     }
 
     /**
@@ -52,7 +38,8 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-        dd(__METHOD__, $id);
+        $item = $this->userRepository->getUserById($id);
+        return view('frontend.users.show', compact('item'));
     }
 
     /**
@@ -63,7 +50,10 @@ class UserController extends BaseController
      */
     public function edit($id)
     {
-        dd(__METHOD__, $id);
+        $item = $this->userRepository->getUserById($id);
+        $cities = $this->cityRepository->getAllCitiesList();
+
+        return view('frontend.users.edit', compact('item', 'cities'));
     }
 
     /**
@@ -73,9 +63,26 @@ class UserController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        dd(__METHOD__, $request, $id);
+        $item = $this->userRepository->getUserById($id);
+
+        if(empty($item)) {
+            return back()
+                ->withErrors(['msg' => "Запись с id=[{$id}] не найдена!"])
+                ->withInput();
+        }
+
+        $data = $request->input();
+        $item->update($data);
+
+        if ($item) {
+            return redirect()->route('user.edit', [$item->id])
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -86,6 +93,20 @@ class UserController extends BaseController
      */
     public function destroy($id)
     {
-        dd(__METHOD__, $id);
+        if($id == 1 )
+            return back()
+                ->withErrors(['msg' => 'Ошибка удаления']);
+
+        $result = User::destroy($id);
+
+        if($result) {
+        //    \Auth::logout();
+            return redirect()
+                ->route('user.index')
+                ->with(['success' => "Запись id[$id] удалена."]);
+        } else {
+            return back()
+                ->withErrors(['msg' => 'Ошибка удаления']);
+        }
     }
 }

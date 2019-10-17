@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\BaseController as BaseController;
-use App\Model\{User, UserRole, Role, City};
+use App\Model\User;
 use App\Repositories\{UserRepository, CityRepository};
+use App\Http\Requests\{UserCreateRequest, UserUpdateRequest};
 
 class UserController extends BaseController
 {
@@ -50,9 +50,18 @@ class UserController extends BaseController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserCreateRequest $request)
     {
-        dd(__METHOD__);
+        $data = $request->input();
+        $item = (new User())->create($data);
+
+        if ($item) {
+            return redirect()->route('admin.user.edit', [$item->id])
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -63,7 +72,6 @@ class UserController extends BaseController
      */
     public function show($id)
     {
-
         $item = $this->userRepository->getUserById($id);
         return view('admin.users.show', compact('item'));
     }
@@ -89,9 +97,26 @@ class UserController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
-        dd(__METHOD__);
+        $item = $this->userRepository->getUserById($id);
+
+        if(empty($item)) {
+            return back()
+                ->withErrors(['msg' => "Запись с id=[{$id}] не найдена!"])
+                ->withInput();
+        }
+
+        $data = $request->input();
+        $item->update($data);
+
+        if ($item) {
+            return redirect()->route('admin.user.edit', [$item->id])
+                ->with(['success' => 'Успешно сохранено']);
+        } else {
+            return back()->withErrors(['msg' => 'Ошибка сохранения'])
+                ->withInput();
+        }
     }
 
     /**
@@ -102,6 +127,19 @@ class UserController extends BaseController
      */
     public function destroy($id)
     {
-        dd(__METHOD__);
+        if($id == 1 )
+            return back()
+                ->withErrors(['msg' => 'Ошибка удаления']);
+
+        $result = User::destroy($id);
+
+        if($result) {
+            return redirect()
+                ->route('admin.user.index')
+                ->with(['success' => "Запись id[$id] удалена."]);
+        } else {
+            return back()
+                ->withErrors(['msg' => 'Ошибка удаления']);
+        }
     }
 }
