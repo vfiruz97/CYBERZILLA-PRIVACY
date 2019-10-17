@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Admin\BaseController as BaseController;
 use App\Model\{User, UserRole, Role, City};
+use App\Repositories\UserRepository;
 
 class UserController extends BaseController
 {
@@ -13,15 +14,19 @@ class UserController extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
+    private $userRepository;
+
     public function __construct()
     {
         parent::__construct();
-        //
+
+        $this->userRepository = app(UserRepository::class);
     }
 
     public function index()
     {
-        dd(__METHOD__);
+        $paginator = $this->userRepository->getAllWithPagination();
+        return view('admin.users.index', compact('paginator'));
     }
 
     /**
@@ -31,7 +36,8 @@ class UserController extends BaseController
      */
     public function create()
     {
-        dd(__METHOD__);
+        $items = new User();
+        return view('admin.users.create', compact('items'));
     }
 
     /**

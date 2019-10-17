@@ -15,6 +15,11 @@ class User extends Authenticatable
      *
      * @var array
      */
+    private $rolesTitle = [
+        '1' => 'админ',
+        '2' => 'пользователь',
+    ];
+
     protected $fillable = [
         'name', 'email', 'password',
     ];
@@ -36,4 +41,20 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function city() {
+        return $this->belongsTo(City::class, 'city_id', 'id');
+    }
+
+    public function role() {
+        return $this->belongsTo(UserRole::class, 'id', 'user_id');
+    }
+
+    public function getFullNameAttribute() {
+        return $this->surname.' '.$this->name;
+    }
+
+    public function getRoleTitleAttribute() {
+        return $this->rolesTitle[$this->role->role_id];
+    }
 }
