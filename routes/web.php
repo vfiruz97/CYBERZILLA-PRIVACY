@@ -15,6 +15,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+$groupAdmin = [
+    'namespace' => 'Admin',
+    'prefix' => 'admin/'
+];
+Route::group($groupAdmin, function(){
+    Route::resource('user', 'UserController')->names('admin.user');
+});
 
-Route::get('/home', 'HomeController@index')->name('home');
+$groupFrontend = [
+    'namespace' => 'Frontend',
+];
+Route::group($groupFrontend, function(){
+    $methods = ['index', 'edit', 'update', 'destroy'];
+    Route::resource('user', 'UserController')
+        ->only($methods)
+        ->names('user');
+});
+
+Auth::routes();
