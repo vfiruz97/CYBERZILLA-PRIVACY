@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Admin\BaseController;
+use App\Http\Controllers\Admin\BaseController as BaseController;
+use App\Model\{User, UserRole, Role, City};
 
 class UserController extends BaseController
 {

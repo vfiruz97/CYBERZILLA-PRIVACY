@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Frontend\BaseController;
+use App\Http\Controllers\Frontend\BaseController as BaseController;
 
 class UserController extends BaseController
 {

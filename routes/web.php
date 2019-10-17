@@ -20,7 +20,7 @@ $groupAdmin = [
     'prefix' => 'admin/'
 ];
 Route::group($groupAdmin, function(){
-    Route::resource('user', 'UserController')->names('admin.user');
+    Route::resource('users', 'UserController')->names('admin.user');
 });
 
 $groupFrontend = [
