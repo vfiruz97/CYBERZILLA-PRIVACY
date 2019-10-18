@@ -4,11 +4,19 @@
     <div class="container">
         @include('frontend.users.includes.update.error_messages')
         @if(Auth::check())
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center">
-                    <a href="{{route('user.show', Auth::user()->id)}}" class="btn btn-outline-primary btn-lg" >Мой профиль</a>
+            @if(Auth::user()->role->role_id == 1)
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <a href="{{route('admin.user.index')}}" class="btn btn-outline-primary btn-lg" >Список пользователей</a>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="row justify-content-center">
+                    <div class="col-md-8 text-center">
+                        <a href="{{route('user.show', Auth::user()->id)}}" class="btn btn-outline-primary btn-lg" >Мой профиль</a>
+                    </div>
+                </div>
+            @endif
             <br>
         @endif
         <div class="row justify-content-center">

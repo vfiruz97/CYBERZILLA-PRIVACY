@@ -35,7 +35,7 @@ class UserObserver
         if($user->password == null)
             $user->password = $user->getOriginal('password');
         else
-            $user->password = bcrypt($user->password);
+            $user->password = \Hash::make($user->password);
     }
 
     /**

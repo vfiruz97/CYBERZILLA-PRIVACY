@@ -21,12 +21,19 @@ class UserController extends BaseController
     {
         parent::__construct();
 
+        $this->middleware('auth')->except('index');
+
         $this->userRepository = app(UserRepository::class);
         $this->cityRepository = app(CityRepository::class);
     }
 
     public function index()
     {
+        if(\Auth::check()) {
+            if(\Auth::user()->role->role_id == 1)
+                return redirect('admin/users/');
+            return redirect('/');
+        }
         return view('frontend.users.index');
     }
 
@@ -74,7 +81,11 @@ class UserController extends BaseController
         }
 
         $data = $request->input();
-        $item->update($data);
+        if(\Gate::allows('update-user', $id)) {
+            $item->update($data);
+        } else {
+            $item = null;
+        }
 
         if ($item) {
             return redirect()->route('user.edit', [$item->id])
@@ -96,8 +107,11 @@ class UserController extends BaseController
         if($id == 1 )
             return back()
                 ->withErrors(['msg' => 'Ошибка удаления']);
-
-        $result = User::destroy($id);
+        if(\Gate::allows('delete-user', $id)) {
+            $result = User::destroy($id);
+        } else {
+            $result = null;
+        }
 
         if($result) {
             \Auth::logout();
