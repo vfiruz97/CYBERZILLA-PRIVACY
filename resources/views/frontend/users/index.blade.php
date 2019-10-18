@@ -35,6 +35,11 @@
                             <li>Демострацию лучше проводить либо на хостинге, либо через teamviewer на Вашей машине. +</li>
                             <li>Желательно загруженный код в git</li>
                         </ul>
+                        <p>Учетка администратора</p>
+                        <ul>
+                            <li>Login: admin@vfiruz.ru</li>
+                            <li>Password: 123admin</li>
+                        </ul>
                     </div>
                 </div>
             </div>

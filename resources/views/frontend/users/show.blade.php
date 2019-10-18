@@ -20,7 +20,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="surname">Фамилия</label>
-                                            <input name='surname' value="{{ $item->name }}"
+                                            <input name='surname' value="{{ $item->surname }}"
                                                    id='surname'
                                                    type="text"
                                                    class="form-control"

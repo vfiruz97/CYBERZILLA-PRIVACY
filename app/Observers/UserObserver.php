@@ -15,6 +15,11 @@ class UserObserver
      * по умолчанию всем новым зарегистриванным пользователям равно 2
      * @return void
      */
+    public function creating(User $user)
+    {
+        $user->password = \Hash::make($user->password);
+    }
+
     public function created(User $user)
     {
         $userRole = new UserRole();
