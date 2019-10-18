@@ -103,7 +103,12 @@
             <div class="col-md-3">
                 <div class="card">
                     <div class="card-body">
-                        <a href="{{route('user.index')}}" class="btn btn-info btn-block">Назад</a>
+                        <a href="{{route('user.edit', $item->id)}}" class="btn btn-info btn-block">Редактировать</a>
+                        <form method="post" action="{{ route('user.destroy', $item->id) }}" style="margin-top: 6px">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-block btn-danger">Удалить</button>
+                        </form>
                         <hr>
                         <div class="form-group">
                             <label for="id">ID:</label>
@@ -113,7 +118,7 @@
                                    class="form-control"
                                    disabled>
                         </div>
-                        <hr>
+
                         <div class="form-group">
                             <label for="created_at">Создано</label>
                             <input name='created_at' value="{{ $item->created_at }}"

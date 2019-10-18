@@ -30,7 +30,7 @@ class UserCreateRequest extends FormRequest
             'age' => 'required|integer',
             'city_id' => 'required|integer|exists:cities,id',
             'about' => 'string|min:3|max:500',
-            'email' => 'required|max:50|unique:users',
+            'email' => 'required|email|max:50|unique:users',
             'password' => 'required|min:5',
         ];
     }

@@ -1,6 +1,7 @@
  <div class="card">
      <div class="card-body">
          <button type="submit" class="btn btn-block btn-primary">Сохранить</button>
+         <a href="{{route('user.show', $item->id)}}" class="btn btn-info btn-block">Назад</a>
          <hr>
          <div class="form-group">
              <label for="id">ID:</label>
@@ -10,7 +11,7 @@
                     class="form-control"
                     disabled>
          </div>
-         <hr>
+
          <div class="form-group">
              <label for="created_at">Создано</label>
              <input name='created_at' value="{{ $item->created_at }}"

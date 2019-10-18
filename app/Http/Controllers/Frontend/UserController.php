@@ -100,7 +100,7 @@ class UserController extends BaseController
         $result = User::destroy($id);
 
         if($result) {
-        //    \Auth::logout();
+            \Auth::logout();
             return redirect()
                 ->route('user.index')
                 ->with(['success' => "Запись id[$id] удалена."]);

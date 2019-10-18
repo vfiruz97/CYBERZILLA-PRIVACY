@@ -20,6 +20,7 @@ class UserObserver
         $userRole = new UserRole();
         $userRole->user_id = $user->id;
         $userRole->role_id = 2;
+        $userRole->slug = 'пользователь';
         $userRole->save();
     }
 

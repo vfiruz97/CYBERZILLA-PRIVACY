@@ -29,7 +29,7 @@ class UserUpdateRequest extends FormRequest
             'age' => 'required|integer',
             'city_id' => 'required|integer|exists:cities,id',
             'about' => 'string|min:3|max:500',
-            'email' => 'required|max:50',
+            'email' => 'required|email|max:50',
         ];
     }
 }
