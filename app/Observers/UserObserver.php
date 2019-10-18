@@ -17,7 +17,7 @@ class UserObserver
      */
     public function creating(User $user)
     {
-        $user->password = \Hash::make($user->password);
+        //$user->password = \Hash::make($user->password);
     }
 
     public function created(User $user)

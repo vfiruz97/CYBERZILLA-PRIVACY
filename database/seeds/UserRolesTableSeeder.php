@@ -21,7 +21,7 @@ class UserRolesTableSeeder extends Seeder
 
         DB::table('user_roles')->insert($data);
 
-        for ($i=2; $i<102; $i++) {
+        for ($i=2; $i<5002; $i++) {
             $data = [
                 [
                     'user_id' => $i,

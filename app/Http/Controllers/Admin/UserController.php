@@ -55,6 +55,7 @@ class UserController extends BaseController
     public function store(UserCreateRequest $request)
     {
         $data = $request->input();
+        $data['password'] = \Hash::make($data['password']);
         if(\Gate::allows('update-user')) {
             $item = (new User())->create($data);
         } else {
